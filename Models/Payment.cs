@@ -27,7 +27,7 @@ namespace MvcTestApp.Models
         public DateTime Date { get; set; }
 
         [Display(Name = "Сумма")]
-        public double Sum { get; set; }
+        public decimal Sum { get; set; }
 
         /// <summary>
         /// Конструктор
@@ -36,7 +36,7 @@ namespace MvcTestApp.Models
         /// <param name="customerId"></param>
         /// <param name="date">Дата</param>
         /// <param name="sum">Сумма</param>
-        public Payment(int id, int customerId, DateTime date, double sum)
+        public Payment(int id, int customerId, DateTime date, decimal sum)
         {
             Id = id;
             CustomerId = customerId;

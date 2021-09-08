@@ -14,17 +14,16 @@ namespace MvcTestApp
     /// </summary>
     public static class DAL
     {
-        //static string connectionString = @"Data source = (LocalDB)\MSSQLLocalDB;Initial Catalog = DbMvcTestApp; Integrated Security = True";
         static string connectionString = @"Data source = (LocalDB)\MSSQLLocalDB;Initial Catalog = DbMvcTestApp; Integrated Security = True";
 
         /// <summary>
-        /// Получить список контрагентов
+        /// Получить список контрагентов и платежей
         /// </summary>
-        public static List<Customer> GetCustomers()
+        public static List<CustomerPayment> GetCustomerPayment()
         {
-            List<Customer> listCustomer = new List<Customer>();
+            List<CustomerPayment> listCustomerPayment = new List<CustomerPayment>();
 
-            string sqlExpression = "sp_SelectCustomers";
+            string sqlExpression = "sp_SelectCustomersPayments";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -38,18 +37,22 @@ namespace MvcTestApp
                     while (reader.Read())
                     {
                         int id = reader.GetInt32(0);
-                        string name = reader.GetString(1);
-                        Customer customer = new Customer(id, name);
-                        listCustomer.Add(customer);
+                        string customerName = reader.GetString(1);
+                        int paymentId = reader.GetInt32(2);
+                        int customerId = reader.GetInt32(3);
+                        DateTime date = reader.GetDateTime(4);
+                        decimal sum = reader.GetDecimal(5);
+                        CustomerPayment customerPayment = new CustomerPayment(id, customerId, paymentId, customerName, date, sum);
+                        listCustomerPayment.Add(customerPayment);
                     }
                 }
                 reader.Close();
             }
 
-            return listCustomer;
+            return listCustomerPayment;
         }
 
-        /// <summary>
+        /// <summary>5490,00
         /// Платежи
         /// </summary>
         public static DbSet<Payment> Payments { get; set; }

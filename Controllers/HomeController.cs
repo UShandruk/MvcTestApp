@@ -24,8 +24,9 @@ namespace MvcTestApp.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
-            List<Customer> listCustomer = DAL.GetCustomers();
-            return View(listCustomer);
+            Model model = new Model();
+            model.ListCustomerPayment = DAL.GetCustomerPayment();
+            return View(model);
         }
 
 

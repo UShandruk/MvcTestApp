@@ -1,13 +1,21 @@
-﻿@model MvcTestApp.Models.CustomerPayment
+﻿@model Model
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Платежи";
 }
 
-<div class="text-center">
-    @*<h2>Enter The Number Of Days To Display</h2>*@
-    @*Дата: <input type="date" id="date" name="date" />*@
-    Дата: @Html.(model => model.Date)
-    Контрагент: @Html.TextBoxFor(model => model.Id)
-    <input type="submit" value="ать" />
-    @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
-</div>
+<!--<div class="text-center">-->
+@*<h2>Enter The Number Of Days To Display</h2>*@
+@*Дата: <input type="date" id="date" name="date" />*@
+<input type="submit" value="Отфильтровать" />-->
+@*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+<!--</div>-->
+
+@for (int i = 0; i < Model.ListCustomerPayment.Count(); ++i)
+{
+    @Html.HiddenFor(m => m.ListCustomerPayment[i].Id)
+    @Html.HiddenFor(m => m.ListCustomerPayment[i].PaymentId)
+    @Html.HiddenFor(m => m.ListCustomerPayment[i].CustomerId)
+    @Html.TextBoxFor(m => m.ListCustomerPayment[i].CustomerName)
+    @Html.TextBoxFor(m => m.ListCustomerPayment[i].Date)
+    @Html.TextBoxFor(m => m.ListCustomerPayment[i].Sum)
+}

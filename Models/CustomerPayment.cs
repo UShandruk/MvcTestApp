@@ -35,6 +35,25 @@ namespace MvcTestApp.Models
         /// <summary>
         /// Сумма платежа
         /// </summary>
-        public double Sum { get; set; }
+        public decimal Sum { get; set; }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="id">Уникальный идентификатор в БД</param>
+        /// <param name="customerId">Связь с данными таблицы Контрагент</param>
+        /// <param name="paymentId">Связь с данными таблицы Платежи</param>
+        /// <param name="customerName">Наименование контрагента</param>
+        /// <param name="date">Дата</param>
+        /// <param name="sum">Сумма</param>
+        public CustomerPayment(int id, int customerId, int paymentId, string customerName, DateTime date, decimal sum)
+        {
+            Id = id;
+            CustomerId = customerId;
+            PaymentId = paymentId;
+            CustomerName = customerName;
+            Date = date;
+            Sum = sum;
+        }
     }
 }
